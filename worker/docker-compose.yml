@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  worker:
+    build: .
+    environment:
+      - WHISPR_ORCHESTRATOR_URL=http://localhost:8000
+      - VLLM_BASE_URL=http://vllm:8001
+    volumes:
+      - ./artifacts:/app/artifacts
+    depends_on:
+      - vllm
+
+  vllm:
+    image: vllm/vllm-openai:latest
+    command: ["--model", "gpt-oss-20b"]
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    ports:
+      - "8001:8001"
+

@@ -1,0 +1,8 @@
+fastapi
+faster-whisper==1.0.3
+httpx
+numpy
+python-multipart
+uvicorn[standard]
+vllm==0.4.2
+

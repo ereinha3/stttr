@@ -3,15 +3,18 @@
 from __future__ import annotations
 
 import time
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import TYPE_CHECKING, Dict, Iterable, List, Optional, Tuple
 
 from faster_whisper import WhisperModel
 
 from worker.settings import MODEL_CACHE_ROOT
 
+if TYPE_CHECKING:
+    from worker.transcribe import LoadedModel
 
-_MODEL_CACHE: Dict[Tuple[str, str], WhisperModel] = {}
+_MODEL_CACHE: Dict[Tuple[str, str], "LoadedModel"] = {}
 
 
 def _auto_select_device(device_override: Optional[str] = None) -> str:
@@ -32,26 +35,35 @@ def _resolve_compute_type(device: str, compute_type_override: Optional[str] = No
     return "float16" if device == "cuda" else "int8"
 
 
+@dataclass
+class LoadedModel:
+    """Wrapper to track model metadata alongside the WhisperModel instance."""
+    model: WhisperModel
+    device: str
+    compute_type: str
+
+
 def ensure_model(
     *,
     device: Optional[str] = None,
     compute_type: Optional[str] = None,
-) -> WhisperModel:
+) -> LoadedModel:
     resolved_device = _auto_select_device(device)
     resolved_compute_type = _resolve_compute_type(resolved_device, compute_type)
     cache_key = (resolved_device, resolved_compute_type)
 
-    model = _MODEL_CACHE.get(cache_key)
-    if model is None:
+    loaded = _MODEL_CACHE.get(cache_key)
+    if loaded is None:
         model = WhisperModel(
             "large-v3",
             device=resolved_device,
             compute_type=resolved_compute_type,
             download_root=str(MODEL_CACHE_ROOT),
         )
-        _MODEL_CACHE[cache_key] = model
+        loaded = LoadedModel(model=model, device=resolved_device, compute_type=resolved_compute_type)
+        _MODEL_CACHE[cache_key] = loaded
 
-    return model
+    return loaded
 
 
 def _write_plaintext(segments: Iterable[dict], out_path: Path) -> None:
@@ -78,10 +90,10 @@ def transcribe_file(
     transcripts_dir = Path(output_dir)
     transcripts_dir.mkdir(parents=True, exist_ok=True)
 
-    model = ensure_model(device=device, compute_type=compute_type)
+    loaded = ensure_model(device=device, compute_type=compute_type)
 
     start_time = time.time()
-    raw_segments, info = model.transcribe(
+    raw_segments, info = loaded.model.transcribe(
         str(resolved_input),
         beam_size=beam_size,
         vad_filter=vad_filter,
@@ -114,10 +126,10 @@ def transcribe_file(
         "language_probability": info.language_probability,
         "transcript_path": str(txt_path),
         "duration": duration,
-        "device": model.device,
-        "compute_type": model.compute_type,
+        "device": loaded.device,
+        "compute_type": loaded.compute_type,
     }
 
 
-__all__ = ["ensure_model", "transcribe_file"]
+__all__ = ["LoadedModel", "ensure_model", "transcribe_file"]
 

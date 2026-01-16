@@ -1,0 +1,845 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 11.92,
+      "text": " It's one of the topics that I'm interested in, because the facility's track is a piece"
+    },
+    {
+      "start": 11.92,
+      "end": 18.04,
+      "text": " on the technology, and right now we're essentially looking at how workloads are changing, how"
+    },
+    {
+      "start": 18.04,
+      "end": 24.72,
+      "text": " we're going to generate different pieces of data from the CPUs and show those power monitoring"
+    },
+    {
+      "start": 24.72,
+      "end": 32.4,
+      "text": " systems back into the tenants' visibility for fine-tuning workloads and scheduling workloads."
+    },
+    {
+      "start": 32.4,
+      "end": 37.2,
+      "text": " So primarily I wanted to talk today about the black paper effort that we've been working"
+    },
+    {
+      "start": 37.2,
+      "end": 43.44,
+      "text": " through with a number of entities from the industry."
+    },
+    {
+      "start": 43.44,
+      "end": 51.44,
+      "text": " So as many of you know, there's a collection of data points where those points come from"
+    },
+    {
+      "start": 51.44,
+      "end": 53.84,
+      "text": " various entities within the infrastructure."
+    },
+    {
+      "start": 53.84,
+      "end": 54.64,
+      "text": " Chiller is a common name."
+    },
+    {
+      "start": 54.64,
+      "end": 54.72,
+      "text": " Chiller is a common name. Chiller is a common name."
+    },
+    {
+      "start": 54.72,
+      "end": 55.28,
+      "text": " Chiller is a common name."
+    },
+    {
+      "start": 55.28,
+      "end": 56.08,
+      "text": " We've got two different types of data centers."
+    },
+    {
+      "start": 56.08,
+      "end": 57.28,
+      "text": " We've got two different types of data centers, temperature sensors, pressure sensors."
+    },
+    {
+      "start": 57.28,
+      "end": 62.64,
+      "text": " All these different pieces of information are critical for what exactly the data center"
+    },
+    {
+      "start": 62.64,
+      "end": 63.36,
+      "text": " is doing."
+    },
+    {
+      "start": 63.36,
+      "end": 70.32,
+      "text": " It's kind of the comparable to any machine, the entire system is within the data halls"
+    },
+    {
+      "start": 70.32,
+      "end": 71.68,
+      "text": " and the data center."
+    },
+    {
+      "start": 71.68,
+      "end": 76.48,
+      "text": " The mid-time monitoring system is essential to the operations team."
+    },
+    {
+      "start": 76.48,
+      "end": 80.96000000000001,
+      "text": " So if you're looking at how the data centers are operating, that is absolutely critical."
+    },
+    {
+      "start": 80.96000000000001,
+      "end": 84.64,
+      "text": " How do you move into this AI function?"
+    },
+    {
+      "start": 84.64,
+      "end": 89.64,
+      "text": " that type of information is going to become apparent to the active tenants."
+    },
+    {
+      "start": 89.64,
+      "end": 94.64,
+      "text": " It's going to work with how the supercomputers essentially operate within the data halls"
+    },
+    {
+      "start": 94.64,
+      "end": 97.64,
+      "text": " is becoming more important."
+    },
+    {
+      "start": 97.64,
+      "end": 102.64,
+      "text": " This fluctuation is obviously going to be growing because of the intensities of this"
+    },
+    {
+      "start": 102.64,
+      "end": 104.64,
+      "text": " backstretching."
+    },
+    {
+      "start": 104.64,
+      "end": 109.64,
+      "text": " When you think of the building of the system, you can kind of think of a couple different"
+    },
+    {
+      "start": 109.64,
+      "end": 111.64,
+      "text": " ways to compartmentalize it."
+    },
+    {
+      "start": 111.64,
+      "end": 117.64,
+      "text": " The base systems within the tampa plants provide chillers, pumps, your CDUs, your secondary"
+    },
+    {
+      "start": 117.64,
+      "end": 119.64,
+      "text": " fluid temperatures and pressures, the pump speeds."
+    },
+    {
+      "start": 119.64,
+      "end": 124.64,
+      "text": " All of those are tied into a kind of relative state of the infrastructure."
+    },
+    {
+      "start": 124.64,
+      "end": 129.64,
+      "text": " So when you look at a third party basin, the landlord, the building owner is responsible"
+    },
+    {
+      "start": 129.64,
+      "end": 132.64,
+      "text": " for everything outside the hall."
+    },
+    {
+      "start": 132.64,
+      "end": 138.64,
+      "text": " That information needs to be readily accessible by the tenants in some shape or fashion, getting"
+    },
+    {
+      "start": 138.64,
+      "end": 139.64,
+      "text": " that."
+    },
+    {
+      "start": 139.64000000000001,
+      "end": 143.64000000000001,
+      "text": " That information needs to be documented or getting a standard set in place for integration"
+    },
+    {
+      "start": 143.64000000000001,
+      "end": 148.64000000000001,
+      "text": " across the different data center users is going to be very important."
+    },
+    {
+      "start": 148.64000000000001,
+      "end": 153.64000000000001,
+      "text": " Inside the data hall, of course, there's tenant type systems where you're looking at measuring"
+    },
+    {
+      "start": 153.64000000000001,
+      "end": 155.64000000000001,
+      "text": " for SLA's."
+    },
+    {
+      "start": 155.64000000000001,
+      "end": 159.64000000000001,
+      "text": " You're going to essentially have NFE units, you're going to get plus weight, you're going"
+    },
+    {
+      "start": 159.64000000000001,
+      "end": 162.64000000000001,
+      "text": " to get carbon meter units, you're going to get voltage, you're going to get these types"
+    },
+    {
+      "start": 162.64000000000001,
+      "end": 163.64000000000001,
+      "text": " of things."
+    },
+    {
+      "start": 163.64000000000001,
+      "end": 167.64000000000001,
+      "text": " Inside the data halls, it's going to be easier because you can take those points, tie them"
+    },
+    {
+      "start": 167.64000000000001,
+      "end": 168.64000000000001,
+      "text": " right back into the facility record."
+    },
+    {
+      "start": 168.64000000000001,
+      "end": 173.64000000000001,
+      "text": " That makes it quite a bit easier to work through those points."
+    },
+    {
+      "start": 173.64000000000001,
+      "end": 178.64000000000001,
+      "text": " The challenge that we're going to be facing, or are facing now, is how do we get the data"
+    },
+    {
+      "start": 178.64000000000001,
+      "end": 184.64000000000001,
+      "text": " center vitals back into the tenants' visibility, and ultimately also get some of the information"
+    },
+    {
+      "start": 184.64000000000001,
+      "end": 190.64000000000001,
+      "text": " from the tenants back into the landlord without duplicating the leader in building management"
+    },
+    {
+      "start": 190.64000000000001,
+      "end": 191.64000000000001,
+      "text": " systems."
+    },
+    {
+      "start": 191.64000000000001,
+      "end": 197.64000000000001,
+      "text": " That has yet to be solved at scale with all the different entities."
+    },
+    {
+      "start": 198.64000000000001,
+      "end": 204.64000000000001,
+      "text": " As I mentioned previously, with the growing demand, the growing density of these racks,"
+    },
+    {
+      "start": 204.64000000000001,
+      "end": 210.64000000000001,
+      "text": " fluctuations that may have been cycling on a certain period are now going to be much"
+    },
+    {
+      "start": 210.64000000000001,
+      "end": 211.64000000000001,
+      "text": " greater."
+    },
+    {
+      "start": 211.64000000000001,
+      "end": 217.64000000000001,
+      "text": " The amplitudes of those peaks and valleys will change relative to traditional AI, or"
+    },
+    {
+      "start": 217.64000000000001,
+      "end": 220.64000000000001,
+      "text": " traditional computer storage workloads and networking."
+    },
+    {
+      "start": 220.64000000000001,
+      "end": 223.64000000000001,
+      "text": " How does this play into the data center infrastructure?"
+    },
+    {
+      "start": 223.64000000000001,
+      "end": 227.64000000000001,
+      "text": " Being able to control the infrastructure needs to be improved."
+    },
+    {
+      "start": 228.64000000000001,
+      "end": 235.64000000000001,
+      "text": " If the AI workloads can swing 20, 30 percent, if you look at the size of chillers and pumps"
+    },
+    {
+      "start": 235.64000000000001,
+      "end": 240.64000000000001,
+      "text": " and these types of things, they're not really changing relative to the AI infrastructure."
+    },
+    {
+      "start": 240.64000000000001,
+      "end": 245.64000000000001,
+      "text": " How do you bring up a chiller preemptively knowing that you have a large training model"
+    },
+    {
+      "start": 245.64000000000001,
+      "end": 246.64000000000001,
+      "text": " coming through?"
+    },
+    {
+      "start": 246.64000000000001,
+      "end": 250.64000000000001,
+      "text": " These types of things require some sort of communication between the building systems"
+    },
+    {
+      "start": 250.64000000000001,
+      "end": 253.64000000000001,
+      "text": " and the workloads themselves."
+    },
+    {
+      "start": 253.64000000000001,
+      "end": 257.64,
+      "text": " Other things need to compensate as well from the workload profiles."
+    },
+    {
+      "start": 257.64,
+      "end": 266.64,
+      "text": " Most people have probably seen the GPU inrush and the power profiles and how it's consuming"
+    },
+    {
+      "start": 266.64,
+      "end": 267.64,
+      "text": " power."
+    },
+    {
+      "start": 267.64,
+      "end": 271.64,
+      "text": " That's quite a bit different than you would expect from a normal computer storage or networking"
+    },
+    {
+      "start": 271.64,
+      "end": 272.64,
+      "text": " deployment."
+    },
+    {
+      "start": 272.64,
+      "end": 280.64,
+      "text": " The main piece of this furniture white paper that we've been working on is essentially"
+    },
+    {
+      "start": 280.64,
+      "end": 286.64,
+      "text": " getting information from this service provider secure network back into the tenant's use"
+    },
+    {
+      "start": 286.64,
+      "end": 294.64,
+      "text": " through one lead or another, which is kind of yet to be determined."
+    },
+    {
+      "start": 294.64,
+      "end": 297.64,
+      "text": " The building management system, of course, is controlling all these critical components,"
+    },
+    {
+      "start": 297.64,
+      "end": 300.64,
+      "text": " so network security is extremely important."
+    },
+    {
+      "start": 300.64,
+      "end": 305.64,
+      "text": " You can imagine what would go wrong if the building management system were to be made"
+    },
+    {
+      "start": 305.64,
+      "end": 307.64,
+      "text": " public on a website or whatnot."
+    },
+    {
+      "start": 307.64,
+      "end": 311.64,
+      "text": " People would be able to potentially change things like that, which would be catastrophic"
+    },
+    {
+      "start": 311.64,
+      "end": 312.64,
+      "text": " to the infrastructure."
+    },
+    {
+      "start": 312.64,
+      "end": 314.64,
+      "text": " On the same token, you don't want to open up a vulnerability."
+    },
+    {
+      "start": 314.64,
+      "end": 319.64,
+      "text": " You don't want to open up a vulnerability to the tenant's private production networks,"
+    },
+    {
+      "start": 319.64,
+      "end": 320.64,
+      "text": " right?"
+    },
+    {
+      "start": 320.64,
+      "end": 324.64,
+      "text": " Because those are perhaps the paradox of keeping privacy and all these things."
+    },
+    {
+      "start": 324.64,
+      "end": 331.64,
+      "text": " So how do we bridge that gap to get information transported in a timely fashion with the right"
+    },
+    {
+      "start": 331.64,
+      "end": 336.64,
+      "text": " reporting frequencies in these types of environments is going to be something that has to be solved"
+    },
+    {
+      "start": 336.64,
+      "end": 337.64,
+      "text": " for."
+    },
+    {
+      "start": 337.64,
+      "end": 343.64,
+      "text": " Currently, today, there's a couple different secure data transmission options, although"
+    },
+    {
+      "start": 343.64,
+      "end": 345.64,
+      "text": " clearly common."
+    },
+    {
+      "start": 345.64,
+      "end": 351.64,
+      "text": " Some of the reporting, so if you were to imagine, like as a person, so like QTT is a message"
+    },
+    {
+      "start": 351.64,
+      "end": 352.64,
+      "text": " you hear about."
+    },
+    {
+      "start": 352.64,
+      "end": 357.64,
+      "text": " You're cueing telemetry transport, which essentially you can think of as similar to like a magazine"
+    },
+    {
+      "start": 357.64,
+      "end": 358.64,
+      "text": " subscription service."
+    },
+    {
+      "start": 358.64,
+      "end": 363.64,
+      "text": " The publisher is the author of the article, or whoever owns the data initially."
+    },
+    {
+      "start": 363.64,
+      "end": 368.64,
+      "text": " The subscriber is somebody that basically wants to get that data, and the broker is"
+    },
+    {
+      "start": 368.64,
+      "end": 372.64,
+      "text": " essentially like the publishing house, and they're helping you get that content."
+    },
+    {
+      "start": 372.64,
+      "end": 373.64,
+      "text": " Okay."
+    },
+    {
+      "start": 373.64,
+      "end": 379.64,
+      "text": " And of course, the topic is specific to whatever it is that the publisher has for data or information."
+    },
+    {
+      "start": 379.64,
+      "end": 382.64,
+      "text": " So that's one technique to be able to do that."
+    },
+    {
+      "start": 382.64,
+      "end": 387.64,
+      "text": " It's kind of a lightweight protocol for sharing information amongst machines."
+    },
+    {
+      "start": 387.64,
+      "end": 394.64,
+      "text": " Another good example is basically the REST API, which is fairly common for essentially"
+    },
+    {
+      "start": 394.64,
+      "end": 400.64,
+      "text": " getting data and sending requests and messages through an HTTP method."
+    },
+    {
+      "start": 400.64,
+      "end": 402.64,
+      "text": " So another good example I'll learn."
+    },
+    {
+      "start": 402.64,
+      "end": 408.64,
+      "text": " The reporting of it and where does the data get stored is still really important."
+    },
+    {
+      "start": 408.64,
+      "end": 415.64,
+      "text": " So as you have started to analyze, with the waveforms, say, for a bus, or a power unit"
+    },
+    {
+      "start": 415.64,
+      "end": 421.64,
+      "text": " at a bus level, being able to report the waveform for different transit modes or different modes"
+    },
+    {
+      "start": 421.64,
+      "end": 426.64,
+      "text": " changing on the AI supercomputer are very important to be able to analyze."
+    },
+    {
+      "start": 426.64,
+      "end": 431.64,
+      "text": " And if you're taking snapshots of that data every one second versus 60 samples a second"
+    },
+    {
+      "start": 431.64,
+      "end": 437.64,
+      "text": " or 120 samples a second, the data storage requirements are drastically different."
+    },
+    {
+      "start": 437.64,
+      "end": 444.64,
+      "text": " So a lot of this is what we're trying to make into this telemetry sub-track through the"
+    },
+    {
+      "start": 444.64,
+      "end": 446.64,
+      "text": " data center facility track."
+    },
+    {
+      "start": 446.64,
+      "end": 451.64,
+      "text": " And a lot of it, like I mentioned, we've been collaborating with OCP, of course, Microsoft,"
+    },
+    {
+      "start": 451.64,
+      "end": 453.64,
+      "text": " Meta, and Google."
+    },
+    {
+      "start": 453.64,
+      "end": 460.64,
+      "text": " And our whole intention is to get to a point where we can publish guidelines for third-party"
+    },
+    {
+      "start": 460.64,
+      "end": 466.64,
+      "text": " storage, so that way there's a plain look upon what are the right number of building"
+    },
+    {
+      "start": 466.64,
+      "end": 473.64,
+      "text": " management servers or storage devices that we need to learn to get proper data storage."
+    },
+    {
+      "start": 473.64,
+      "end": 476.64,
+      "text": " Some of the other pieces are common naming conversions."
+    },
+    {
+      "start": 476.64,
+      "end": 480.64,
+      "text": " If you've looked at building management control systems or any sort of like points lists,"
+    },
+    {
+      "start": 480.64,
+      "end": 485.64,
+      "text": " you'll know that in a building you can have tens of thousands, if not hundreds of thousands"
+    },
+    {
+      "start": 485.64,
+      "end": 486.64,
+      "text": " of different points."
+    },
+    {
+      "start": 486.64,
+      "end": 489.64,
+      "text": " And at the naming, most of the time, the naming scheme is kind of, it's a piece of paper."
+    },
+    {
+      "start": 489.64,
+      "end": 491.64,
+      "text": " It's a dealer's choice."
+    },
+    {
+      "start": 491.64,
+      "end": 492.64,
+      "text": " So it's whatever makes sense."
+    },
+    {
+      "start": 492.64,
+      "end": 494.64,
+      "text": " They're not really that stupid."
+    },
+    {
+      "start": 494.64,
+      "end": 499.64,
+      "text": " When you do third-party data centers, you don't want to end up having to try to tailor"
+    },
+    {
+      "start": 499.64,
+      "end": 501.64,
+      "text": " point names across different tenants."
+    },
+    {
+      "start": 501.64,
+      "end": 505.64,
+      "text": " So these are some of the things that are going to be more prevalent in the future."
+    },
+    {
+      "start": 505.64,
+      "end": 512.64,
+      "text": " And so with OCP's work, we've been working on getting together the first four white papers"
+    },
+    {
+      "start": 512.64,
+      "end": 519.64,
+      "text": " to explain kind of the business need, and then eventually set up these working rooms"
+    },
+    {
+      "start": 519.64,
+      "end": 525.64,
+      "text": " amongst hyperscalers, you know, major types of market, third-party providers, to be able"
+    },
+    {
+      "start": 525.64,
+      "end": 528.64,
+      "text": " to work on standardizing these things."
+    },
+    {
+      "start": 528.64,
+      "end": 534.64,
+      "text": " And probably one of the most important aspects of this effort is the security aspect of it."
+    },
+    {
+      "start": 534.64,
+      "end": 540.64,
+      "text": " We, many times, will find that tenants will not allow networking hardware or networking"
+    },
+    {
+      "start": 540.64,
+      "end": 543.64,
+      "text": " pathways to leave the secure department."
+    },
+    {
+      "start": 543.64,
+      "end": 547.64,
+      "text": " That makes it extremely hard to get building management or power management points back"
+    },
+    {
+      "start": 547.64,
+      "end": 548.64,
+      "text": " to the tenant."
+    },
+    {
+      "start": 548.64,
+      "end": 551.64,
+      "text": " If you don't allow some sort of physical transport."
+    },
+    {
+      "start": 551.64,
+      "end": 557.64,
+      "text": " So these are some of the tasks that we have to solve for."
+    },
+    {
+      "start": 557.64,
+      "end": 563.64,
+      "text": " So one of the things that I want to also call out very clearly, you know, we need folks"
+    },
+    {
+      "start": 563.64,
+      "end": 564.64,
+      "text": " to be involved."
+    },
+    {
+      "start": 564.64,
+      "end": 569.64,
+      "text": " If you're a controls expert or have ideas on how we can get these transport methodologies"
+    },
+    {
+      "start": 569.64,
+      "end": 573.64,
+      "text": " outlined in detail, we're always looking for support."
+    },
+    {
+      "start": 573.64,
+      "end": 576.64,
+      "text": " You can either reach out to myself or Rob Hoyle."
+    },
+    {
+      "start": 576.64,
+      "end": 578.64,
+      "text": " We've got a number of folks from..."
+    },
+    {
+      "start": 578.64,
+      "end": 580.64,
+      "text": " You know, others that are also participating."
+    },
+    {
+      "start": 580.64,
+      "end": 581.64,
+      "text": " We set up a monthly call."
+    },
+    {
+      "start": 581.64,
+      "end": 586.64,
+      "text": " Although, I think as we start to subdivide some of these tasks, we'll probably set up"
+    },
+    {
+      "start": 586.64,
+      "end": 592.64,
+      "text": " small working groups, especially if we get into some of the nuances of, say, pointing."
+    },
+    {
+      "start": 592.64,
+      "end": 594.64,
+      "text": " Like, we probably don't need everybody for that."
+    },
+    {
+      "start": 594.64,
+      "end": 598.64,
+      "text": " However, coming up to a standard is going to be just as straightforward."
+    },
+    {
+      "start": 598.64,
+      "end": 601.64,
+      "text": " Then, as always, link the facility..."
+    },
+    {
+      "start": 601.64,
+      "end": 603.64,
+      "text": " DSM facility webpage."
+    },
+    {
+      "start": 603.64,
+      "end": 606.64,
+      "text": " If you get some questions, the persons will be reading this as well."
+    },
+    {
+      "start": 606.64,
+      "end": 607.64,
+      "text": " But that is..."
+    },
+    {
+      "start": 607.64,
+      "end": 610.64,
+      "text": " Essentially, white paper is..."
+    },
+    {
+      "start": 610.64,
+      "end": 616.64,
+      "text": " And then that will be out."
+    },
+    {
+      "start": 616.64,
+      "end": 618.64,
+      "text": " And then, again, the intention..."
+    },
+    {
+      "start": 618.64,
+      "end": 622.64,
+      "text": " We will start to finalize that specification and implementation guide and other things"
+    },
+    {
+      "start": 622.64,
+      "end": 627.64,
+      "text": " to support it to kind of go along with the change in the AI of work streams."
+    },
+    {
+      "start": 627.64,
+      "end": 633.64,
+      "text": " And one thing we need to talk about is the specific requirements, what not to run through"
+    },
+    {
+      "start": 633.64,
+      "end": 635.64,
+      "text": " and how to kind of close out."
+    },
+    {
+      "start": 635.64,
+      "end": 636.64,
+      "text": " It doesn't really matter."
+    },
+    {
+      "start": 636.64,
+      "end": 638.64,
+      "text": " It's a presentation."
+    },
+    {
+      "start": 638.64,
+      "end": 641.64,
+      "text": " I think there's none that's really fine through there."
+    },
+    {
+      "start": 641.64,
+      "end": 647.64,
+      "text": " So, there's a lot of content within kind of the geometry track that we have to work through."
+    },
+    {
+      "start": 647.64,
+      "end": 650.64,
+      "text": " So, just kind of bring the awareness before that white paper comes out."
+    },
+    {
+      "start": 650.64,
+      "end": 655.64,
+      "text": " And we're looking forward to some of the standard specifications."
+    },
+    {
+      "start": 658.64,
+      "end": 659.64,
+      "text": " Awesome."
+    },
+    {
+      "start": 659.64,
+      "end": 661.64,
+      "text": " If there's no questions, thanks so much for your time."
+    },
+    {
+      "start": 661.64,
+      "end": 663.64,
+      "text": " If you have any questions, please reach out to us."
+    },
+    {
+      "start": 663.64,
+      "end": 664.64,
+      "text": " We're all cool."
+    }
+  ],
+  "language": "en",
+  "language_probability": 0.9716796875,
+  "transcript_path": "/app/artifacts/test-gpu/telemetry/transcripts/Telemetry.txt",
+  "duration": 31.26524329185486,
+  "device": "cuda",
+  "compute_type": "float16"
+}

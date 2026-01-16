@@ -1,0 +1,1285 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 25.560000000000002,
+      "text": " As you see the progress, we will use the 0.5 version, which focuses on the debunk, okay, like especially CPU debunk features across x86 and ARM, there is a lot of variances and all we want to standardize, okay, and go a lot more depth into type of debunk features, okay."
+    },
+    {
+      "start": 25.560000000000002,
+      "end": 39.82,
+      "text": " And we published a 0.7 version, more focus on the 0.7 version, I will share some details on the, what are the diagnostic improvements we added into the 0.7 version."
+    },
+    {
+      "start": 41.82000000000001,
+      "end": 55.46000000000001,
+      "text": " Like, you saw the scenario, right, when you see the rack scale, like the number of devices, suppliers, which goes into the rack scale, either accelerator, memory,"
+    },
+    {
+      "start": 55.56,
+      "end": 68.06,
+      "text": " Vendor, network, even the hardware type, okay, each vendor provides say, diagnostic tools, even if some vendors have both GPU, CPU and other memory,"
+    },
+    {
+      "start": 68.14,
+      "end": 84.7,
+      "text": " what we observed is that each vendor across the vendors there is a lot of variance, how they release the tools, and then as I said, we need to integrate, and we need to test it, and we need to work with them internally,"
+    },
+    {
+      "start": 85.56,
+      "end": 91.4,
+      "text": " how to understand that is one of the biggest pain point what kind of physical interfaces"
+    },
+    {
+      "start": 92.04,
+      "end": 98.52000000000001,
+      "text": " delivering what api can provide especially on the like you know microsoft"
+    },
+    {
+      "start": 99.32000000000001,
+      "end": 105.4,
+      "text": " most we use windows now we are moving to a lot of work on linux like we want to standardize our"
+    },
+    {
+      "start": 105.4,
+      "end": 111.96000000000001,
+      "text": " linux all the defendants vendors can focus like take a particular linux candle watch name of life"
+    },
+    {
+      "start": 111.96000000000001,
+      "end": 120.12,
+      "text": " linux also multiple distributions but as it focus on the kernel and test those okay and"
+    },
+    {
+      "start": 120.12,
+      "end": 126.44000000000001,
+      "text": " that's where we're focusing on like how do we package all the things into one thing right"
+    },
+    {
+      "start": 128.28,
+      "end": 133.56,
+      "text": " we'll talk a little more details of the diagnostic recipe like generally when you provide the"
+    },
+    {
+      "start": 134.36,
+      "end": 138.52,
+      "text": " diagnostics generally like you provide a documentation i run this tool this way"
+    },
+    {
+      "start": 139.16,
+      "end": 141.88,
+      "text": " it's all manual techniques and"
+    },
+    {
+      "start": 141.96,
+      "end": 146.36,
+      "text": " also sometimes like when we see the free tissue you reach out to the vendors they say oh run this"
+    },
+    {
+      "start": 146.36,
+      "end": 152.76000000000002,
+      "text": " way this is the different recipe you need to do maybe the automatic meat errors and all that right"
+    },
+    {
+      "start": 153.8,
+      "end": 160.84,
+      "text": " like that is the other problem we have and the last one is about the repair actions is mostly"
+    },
+    {
+      "start": 161.64000000000001,
+      "end": 165.48000000000002,
+      "text": " focused i would say is on what are the two layers"
+    },
+    {
+      "start": 166.92000000000002,
+      "end": 171.56,
+      "text": " what are the silicon is observing rather thinking about the health center technician"
+    },
+    {
+      "start": 171.96,
+      "end": 177.32000000000002,
+      "text": " right with the complexity like you see liquid cooling and all that how do we replace the"
+    },
+    {
+      "start": 178.12,
+      "end": 184.12,
+      "text": " one part is very very hard now with the complexity right you need to think to"
+    },
+    {
+      "start": 184.12,
+      "end": 191.56,
+      "text": " repair actions in the point of service technician or like firmware updates okay you need to show the"
+    },
+    {
+      "start": 191.56,
+      "end": 201.32,
+      "text": " results into action oriented not on the what you're observing okay and for this like uh"
+    },
+    {
+      "start": 202.6,
+      "end": 210.04000000000002,
+      "text": " we spent some time okay even though it's part of cpu like we we made these requirements in"
+    },
+    {
+      "start": 210.04000000000002,
+      "end": 218.60000000000002,
+      "text": " generally which can be applied for cpus accelerators pci devices okay like we use that platform and the"
+    },
+    {
+      "start": 218.60000000000002,
+      "end": 227.32,
+      "text": " cpu works team to publish the spec but we're going to leverage this across all other components right"
+    },
+    {
+      "start": 228.12,
+      "end": 231.64000000000001,
+      "text": " and the second thing is about the tools requirement right we want"
+    },
+    {
+      "start": 232.28,
+      "end": 236.28,
+      "text": " same tools to work in manufacturing development phase and production"
+    },
+    {
+      "start": 237.0,
+      "end": 243.0,
+      "text": " like that is the other problem we observed right you get some tools or recipes are different"
+    },
+    {
+      "start": 243.8,
+      "end": 246.76000000000002,
+      "text": " and we want to standardize across the load life cycle"
+    },
+    {
+      "start": 247.88,
+      "end": 254.04000000000002,
+      "text": " and if you see in the picture right when you you put in the five steps of the main"
+    },
+    {
+      "start": 254.04000000000002,
+      "end": 261.40000000000003,
+      "text": " pain points one is when you develop the tools other one is when you test it the tools third is like"
+    },
+    {
+      "start": 262.68,
+      "end": 268.03999999999996,
+      "text": " when you integrate it into hyper scalar or enterprise environment right and then you"
+    },
+    {
+      "start": 268.03999999999996,
+      "end": 275.79999999999995,
+      "text": " execute it okay what problems we face then we are taking actions these are the major areas for the"
+    },
+    {
+      "start": 275.79999999999995,
+      "end": 283.96,
+      "text": " tools uh like we are providing the requirements across like uh what kind of environment like"
+    },
+    {
+      "start": 283.96,
+      "end": 291.08,
+      "text": " all icoscalers are recommending uh suppliers to develop the tools and dependencies"
+    },
+    {
+      "start": 292.76,
+      "end": 298.35999999999996,
+      "text": " let's say like you need you need some special Wijzena code through driver problem or some"
+    },
+    {
+      "start": 298.35999999999996,
+      "end": 305.15999999999997,
+      "text": " things that put those into package right and the second advantage is like the hyper scalability"
+    },
+    {
+      "start": 305.15999999999997,
+      "end": 311.0,
+      "text": " used to work they used to test this one now with the standardization because"
+    },
+    {
+      "start": 311.79999999999995,
+      "end": 316.76,
+      "text": " all are saying similar things a lot of what supplies could can go and test that"
+    },
+    {
+      "start": 316.76,
+      "end": 321.88,
+      "text": " against those requirements then we can easily integrate uh and we can leverage we don't need to"
+    },
+    {
+      "start": 321.96,
+      "end": 326.34,
+      "text": " to duplicate that effort testing when supplier testing because of"
+    },
+    {
+      "start": 326.34,
+      "end": 331.26,
+      "text": " standardization right they can share the results we do minimum test right that"
+    },
+    {
+      "start": 331.26,
+      "end": 338.15999999999997,
+      "text": " will help us save on resources the thing of integration becomes easy and an"
+    },
+    {
+      "start": 338.15999999999997,
+      "end": 341.94,
+      "text": " integration especially when you see errors in the link problems and all like"
+    },
+    {
+      "start": 341.94,
+      "end": 346.38,
+      "text": " whenever we reach out to different suppliers or link you need to run different tools"
+    },
+    {
+      "start": 346.38,
+      "end": 350.94,
+      "text": " the recipe is different more change from somewhere from their settings there's a"
+    },
+    {
+      "start": 350.94,
+      "end": 356.04,
+      "text": " lot of knowledge is shared across meetings requirements that say like"
+    },
+    {
+      "start": 356.04,
+      "end": 361.32,
+      "text": " Rajat provided a talk this morning how do we do recipe generation by tool"
+    },
+    {
+      "start": 361.32,
+      "end": 367.68,
+      "text": " right there's a open source contribution coming up like you can use that tool to"
+    },
+    {
+      "start": 367.68,
+      "end": 374.18,
+      "text": " generate the recipes optimize it okay next thing about action you want to focus"
+    },
+    {
+      "start": 374.18,
+      "end": 376.1,
+      "text": " on the what can be done as a"
+    },
+    {
+      "start": 376.1,
+      "end": 376.36,
+      "text": " video"
+    },
+    {
+      "start": 376.36,
+      "end": 382.12,
+      "text": " looking at the silicon point of view most silicon point of your results you"
+    },
+    {
+      "start": 382.12,
+      "end": 387.1,
+      "text": " can get it from like say vast elementary what logs and all right there is a lot of"
+    },
+    {
+      "start": 387.1,
+      "end": 391.86,
+      "text": " requirements specified in order what management what to do those are the"
+    },
+    {
+      "start": 391.86,
+      "end": 406.08000000000004,
+      "text": " things I will give it to Jitsel from a deeper perspective we have an industry state"
+    },
+    {
+      "start": 406.08000000000004,
+      "end": 406.34000000000003,
+      "text": " city"
+    },
+    {
+      "start": 406.34000000000003,
+      "end": 415.54,
+      "text": " based on the"
+    },
+    {
+      "start": 415.54,
+      "end": 418.74,
+      "text": " data or currentigm and we use the data to utilize this and essentially we"
+    },
+    {
+      "start": 418.74,
+      "end": 423.12,
+      "text": " um take some neural networks and we particularly would encourage the"
+    },
+    {
+      "start": 423.12,
+      "end": 430.46000000000004,
+      "text": " digital system to go into эту that solution function right in the social"
+    },
+    {
+      "start": 430.46000000000004,
+      "end": 432.94000000000005,
+      "text": " environment we would want to adopt in particular a little smaller scale and"
+    },
+    {
+      "start": 432.94000000000005,
+      "end": 433.74,
+      "text": " ultimately we would want to separate the data we provide education or where we"
+    },
+    {
+      "start": 433.74,
+      "end": 434.08000000000004,
+      "text": " do also choose it you don't know data this version my IDs or scale u Speed and"
+    },
+    {
+      "start": 434.08000000000004,
+      "end": 434.94000000000005,
+      "text": " the data I know features between generations of μαavy supply so what way"
+    },
+    {
+      "start": 434.94000000000005,
+      "end": 435.20000000000005,
+      "text": " really would like to go is where we have people actually have a generally big worth"
+    },
+    {
+      "start": 435.20000000000005,
+      "end": 436.18,
+      "text": " I'm going to do think about more macro-level technologies more up� suspensions"
+    },
+    {
+      "start": 436.18,
+      "end": 444.18,
+      "text": " we are monitoring the failures happen and then in cases where we need additional information"
+    },
+    {
+      "start": 444.18,
+      "end": 450.18,
+      "text": " we can configure and collect further information so what where we really would like to be is at"
+    },
+    {
+      "start": 450.18,
+      "end": 455.3,
+      "text": " the connection stand where failures happen we are collecting the logs and then we act on them"
+    },
+    {
+      "start": 455.3,
+      "end": 460.1,
+      "text": " so the common collection mechanism that we would like to hit would be crash terms where when the"
+    },
+    {
+      "start": 460.1,
+      "end": 467.06,
+      "text": " CPU or machine fails we have the crash term the crash term gives us very clear action signals and"
+    },
+    {
+      "start": 467.06,
+      "end": 472.98,
+      "text": " then we act on them now that's going to be the predominant part of how we work but in rare cases"
+    },
+    {
+      "start": 472.98,
+      "end": 478.34000000000003,
+      "text": " where a small subset of the failures we need additional information so that we can debug"
+    },
+    {
+      "start": 478.34000000000003,
+      "end": 484.18,
+      "text": " further now normally this happens during NPI phase where you're in the development cycle"
+    },
+    {
+      "start": 484.18,
+      "end": 489.54,
+      "text": " but many a times after your production you do have to go into some kind of debug cycle"
+    },
+    {
+      "start": 490.18,
+      "end": 496.02000000000004,
+      "text": " so we would like to have that capability also available and this debug cycle mainly requires"
+    },
+    {
+      "start": 496.02000000000004,
+      "end": 500.74,
+      "text": " additional information which crash terms normally don't provide which could be extended register"
+    },
+    {
+      "start": 500.74,
+      "end": 506.66,
+      "text": " dumps or trace dumps it could also be a state machine of how the machine is so state dumps or"
+    },
+    {
+      "start": 506.66,
+      "end": 514.4200000000001,
+      "text": " second dumps we'll talk more into how these differ so in a crash term scenario what you have is a"
+    },
+    {
+      "start": 514.4200000000001,
+      "end": 520.02,
+      "text": " fatal error that happens in the GPU or the CPU or a switch link etc and and this cost"
+    },
+    {
+      "start": 520.02,
+      "end": 520.0600000000001,
+      "text": " you a lot of time so we would like to have that capability also available and this debug cycle"
+    },
+    {
+      "start": 520.0600000000001,
+      "end": 520.08,
+      "text": " mainly requires additional information which crash terms normally don't provide which could be extended"
+    },
+    {
+      "start": 520.08,
+      "end": 523.32,
+      "text": " register dumps or trace dumps or trace dumps this is the crash so that that becomes the trigger event"
+    },
+    {
+      "start": 523.32,
+      "end": 530.2,
+      "text": " and based on the trigger event you then go collect the type of the failure and and based on the"
+    },
+    {
+      "start": 530.9200000000001,
+      "end": 535.88,
+      "text": " failure that you see you then assert whether a certain where it is a normal failure or it's"
+    },
+    {
+      "start": 535.88,
+      "end": 541.08,
+      "text": " a failure that kind of you know has to have an action upon and and in some cases you probably"
+    },
+    {
+      "start": 541.88,
+      "end": 546.0400000000001,
+      "text": " need an analysis to it so some some of them are pretty straightforward you know hey if I"
+    },
+    {
+      "start": 546.0400000000001,
+      "end": 550.0400000000001,
+      "text": " see this dump if I see the signal this is what I need to do but in many cases"
+    },
+    {
+      "start": 550.04,
+      "end": 555.8399999999999,
+      "text": " you will need a pass or an analyzer as we call them where the crash dump is then analyzed by the"
+    },
+    {
+      "start": 555.8399999999999,
+      "end": 562.78,
+      "text": " supplier provided analysis tool which then allows us to take the RAS action and and kind of indicates"
+    },
+    {
+      "start": 562.78,
+      "end": 567.8399999999999,
+      "text": " what should be the next step that we should do and in certain cases we would need assistance"
+    },
+    {
+      "start": 567.8399999999999,
+      "end": 572.6999999999999,
+      "text": " from the vendor when the crash dump analysis probably needs further information but that's"
+    },
+    {
+      "start": 572.6999999999999,
+      "end": 579.9599999999999,
+      "text": " kind of the intern like the more detailed part of it so this whole flow happens automatically and it is a kind of a"
+    },
+    {
+      "start": 579.96,
+      "end": 585.84,
+      "text": " that happens on fated failures and it happens on demand now the requirements"
+    },
+    {
+      "start": 585.84,
+      "end": 590.94,
+      "text": " are obviously we don't have any customer data here it has to be processed across"
+    },
+    {
+      "start": 590.94,
+      "end": 597.0,
+      "text": " the reset because crash time does cost the machine to reset and then you want"
+    },
+    {
+      "start": 597.0,
+      "end": 600.72,
+      "text": " to make sure that this is usable across not just the current product but it's"
+    },
+    {
+      "start": 600.72,
+      "end": 604.5,
+      "text": " kind of standardized so you can use it across the development phase and in"
+    },
+    {
+      "start": 604.5,
+      "end": 606.52,
+      "text": " production and across multiple generations"
+    },
+    {
+      "start": 606.52,
+      "end": 612.16,
+      "text": " SEPA is a format that we are all familiar with through the OCP efforts from the"
+    },
+    {
+      "start": 612.16,
+      "end": 616.24,
+      "text": " fork management work stream and that's what we want to align with from a deeper"
+    },
+    {
+      "start": 616.24,
+      "end": 620.98,
+      "text": " perspective now we get kind of going into that exceptional failure mode where"
+    },
+    {
+      "start": 620.98,
+      "end": 625.06,
+      "text": " this is a smaller subset of failures that we see where we want to collect the"
+    },
+    {
+      "start": 625.06,
+      "end": 629.24,
+      "text": " additional information this would require configuring or unlocking the"
+    },
+    {
+      "start": 629.24,
+      "end": 634.4,
+      "text": " system in some cases class pick as we call it this happens on demand and and"
+    },
+    {
+      "start": 634.4,
+      "end": 636.26,
+      "text": " this the requirements for that would be"
+    },
+    {
+      "start": 636.26,
+      "end": 636.5,
+      "text": " a"
+    },
+    {
+      "start": 636.5,
+      "end": 643.74,
+      "text": " having scan dumps trace dumps or additional state machine dumps taken we"
+    },
+    {
+      "start": 643.74,
+      "end": 647.44,
+      "text": " would like this would be in the SEPA format and it would use the same"
+    },
+    {
+      "start": 647.44,
+      "end": 651.02,
+      "text": " software interface interface as the crash dump so between these two the"
+    },
+    {
+      "start": 651.02,
+      "end": 654.68,
+      "text": " functional mode would be the same it's just that there's additional data that"
+    },
+    {
+      "start": 654.68,
+      "end": 658.78,
+      "text": " is provided which allows us to do the deeper and then we would like to have"
+    },
+    {
+      "start": 658.78,
+      "end": 666.24,
+      "text": " this in production so it makes deeper get scaled pretty useful and easier with"
+    },
+    {
+      "start": 666.24,
+      "end": 673.0,
+      "text": " this and then a near hopper for the GPU"
+    },
+    {
+      "start": 680.0600000000001,
+      "end": 683.08,
+      "text": " hello"
+    },
+    {
+      "start": 683.12,
+      "end": 691.08,
+      "text": " if you about som multipropolis here about standardization efforts diagnostics"
+    },
+    {
+      "start": 691.08,
+      "end": 693.42,
+      "text": " and"
+    },
+    {
+      "start": 693.42,
+      "end": 694.24,
+      "text": " I'm gonna focus on GPS orTIME, but by which means can I actually export a JSON material to the GPU RZ herself because I am currently handling the same system did you know anything about some"
+    },
+    {
+      "start": 694.24,
+      "end": 695.82,
+      "text": " so my colleagues here in the US about standardization efforts diaght nokушen and we can show you how to do things forcefully together with that we can't communicate with methods like proxities like datarep Tim I don't wanna say much about facts because I don't want to be that"
+    },
+    {
+      "start": 696.24,
+      "end": 703.24,
+      "text": " CPU RAS has been covered in other sections, so I'm not going to focus on that one."
+    },
+    {
+      "start": 703.24,
+      "end": 708.24,
+      "text": " It will be just the GPU side."
+    },
+    {
+      "start": 708.24,
+      "end": 718.24,
+      "text": " So from GPU RAS point of view, we have published our version 1.0 spec last year, September."
+    },
+    {
+      "start": 718.24,
+      "end": 725.24,
+      "text": " The focus has been on RAS metrics and what should be the targets around them."
+    },
+    {
+      "start": 725.24,
+      "end": 731.24,
+      "text": " So essentially, the main point here is, given the AI era, we have now new kinds of workloads."
+    },
+    {
+      "start": 731.24,
+      "end": 737.24,
+      "text": " We have training, we have referencing. They can be run concurrently on multiple GPUs."
+    },
+    {
+      "start": 737.24,
+      "end": 748.24,
+      "text": " So things are different. So the traditional RAS metrics would not just be applicable as is in this new AI domain."
+    },
+    {
+      "start": 748.24,
+      "end": 754.24,
+      "text": " So what we looked at is, with the conferencing thing in mind, how do we tweak the RAS metrics"
+    },
+    {
+      "start": 754.24,
+      "end": 755.24,
+      "text": " and what would be the targets around them."
+    },
+    {
+      "start": 755.24,
+      "end": 764.24,
+      "text": " We also looked at fault handling requirements for system, PCIe, GPU, and so on."
+    },
+    {
+      "start": 764.24,
+      "end": 772.24,
+      "text": " Since then, we have been meeting every Friday, talking about how can we make further progress"
+    },
+    {
+      "start": 772.24,
+      "end": 777.24,
+      "text": " and the existing requirements that we have come up with in version 1.0."
+    },
+    {
+      "start": 777.24,
+      "end": 782.24,
+      "text": " We have discussed further. We made some recent updates based on the feedbacks."
+    },
+    {
+      "start": 782.24,
+      "end": 784.24,
+      "text": " We also have looked at the performance of RAS."
+    },
+    {
+      "start": 784.24,
+      "end": 792.24,
+      "text": " We have looked at expanded system and components of RAS and debugdom that Jixin just covered."
+    },
+    {
+      "start": 792.24,
+      "end": 801.24,
+      "text": " And lastly, we have looked at the error analysis tool, which is what I'm going to talk mostly about."
+    },
+    {
+      "start": 801.24,
+      "end": 809.24,
+      "text": " All right, so before I get into that, let me just quickly touch on what is our next version scope."
+    },
+    {
+      "start": 809.24,
+      "end": 813.24,
+      "text": " So we are going to look at last-weekness reduction."
+    },
+    {
+      "start": 813.24,
+      "end": 820.24,
+      "text": " Jixin has talked about how in the training and conferencing world, how the impact can be much bigger"
+    },
+    {
+      "start": 820.24,
+      "end": 827.24,
+      "text": " and how we want to be able to use our cluster more efficiently, so we will focus on that."
+    },
+    {
+      "start": 827.24,
+      "end": 834.24,
+      "text": " We will also look at confidential compute and RAS, what should be the requirements,"
+    },
+    {
+      "start": 834.24,
+      "end": 836.24,
+      "text": " keeping both of them in mind."
+    },
+    {
+      "start": 836.24,
+      "end": 842.24,
+      "text": " And last but not least, we want alignments with other hardware fault management domains,"
+    },
+    {
+      "start": 842.24,
+      "end": 844.24,
+      "text": " for example, RAS API."
+    },
+    {
+      "start": 844.24,
+      "end": 848.24,
+      "text": " So we had a talk this morning on RAS API, what should be the RAS interface,"
+    },
+    {
+      "start": 848.24,
+      "end": 853.24,
+      "text": " how the error collection should look like, how the actions should be like in the fleet."
+    },
+    {
+      "start": 853.24,
+      "end": 861.24,
+      "text": " We want those to be part of the GPU RAS work stream as well, so that they are working together seamlessly."
+    },
+    {
+      "start": 861.24,
+      "end": 868.24,
+      "text": " All right, so with that, let's look into the error analysis tool."
+    },
+    {
+      "start": 868.24,
+      "end": 871.24,
+      "text": " So OCP is all about standardization."
+    },
+    {
+      "start": 871.24,
+      "end": 876.24,
+      "text": " It should be helpful for vendors as well as the CSPs."
+    },
+    {
+      "start": 876.24,
+      "end": 881.24,
+      "text": " So how does the error analysis tool would help us, right?"
+    },
+    {
+      "start": 881.24,
+      "end": 888.24,
+      "text": " So here in this diagram, we are just showing a typical error analysis infrastructure."
+    },
+    {
+      "start": 888.24,
+      "end": 897.24,
+      "text": " The tool, error analysis tool itself, the green box in this diagram, that should come from the vendor."
+    },
+    {
+      "start": 897.24,
+      "end": 901.24,
+      "text": " So the idea is we want all the error,"
+    },
+    {
+      "start": 901.24,
+      "end": 907.24,
+      "text": " all the information routed to the vendor, and the vendor would output some information."
+    },
+    {
+      "start": 907.24,
+      "end": 914.24,
+      "text": " So the standardization part here would, we are looking at it from two different points."
+    },
+    {
+      "start": 914.24,
+      "end": 920.24,
+      "text": " What is the input going into the tool, and what's the output coming out of the tool,"
+    },
+    {
+      "start": 920.24,
+      "end": 923.24,
+      "text": " and how can we standardize those, okay?"
+    },
+    {
+      "start": 923.24,
+      "end": 928.24,
+      "text": " So CPER, we have been talking about CPER for a long time."
+    },
+    {
+      "start": 928.24,
+      "end": 931.24,
+      "text": " That's the standard defined by UFI."
+    },
+    {
+      "start": 931.24,
+      "end": 934.24,
+      "text": " CPER common platform error records."
+    },
+    {
+      "start": 934.24,
+      "end": 940.24,
+      "text": " So as you know, in the CSP field, we can have a lot of different vendors,"
+    },
+    {
+      "start": 940.24,
+      "end": 944.24,
+      "text": " and each vendor would have their own error logging infrastructure."
+    },
+    {
+      "start": 944.24,
+      "end": 949.24,
+      "text": " So we want all those error information captured in CPER format."
+    },
+    {
+      "start": 949.24,
+      "end": 954.24,
+      "text": " The CPER error record would be routed into the vendor tool."
+    },
+    {
+      "start": 954.24,
+      "end": 959.24,
+      "text": " So to be able to route those information to the right vendor tool,"
+    },
+    {
+      "start": 959.24,
+      "end": 965.24,
+      "text": " we will parse the error information that will be routed to the right vendor."
+    },
+    {
+      "start": 965.24,
+      "end": 969.24,
+      "text": " That's where the green box here."
+    },
+    {
+      "start": 969.24,
+      "end": 974.24,
+      "text": " Now, the other point here is, as we have been saying,"
+    },
+    {
+      "start": 974.24,
+      "end": 978.24,
+      "text": " debug done, crash done, all those should be in CPER, right?"
+    },
+    {
+      "start": 978.24,
+      "end": 985.24,
+      "text": " So here, what we want is all kinds of errors, correctable, non-fatal, fatal, crash, debug,"
+    },
+    {
+      "start": 985.24,
+      "end": 988.24,
+      "text": " everything should be in CPER format,"
+    },
+    {
+      "start": 988.24,
+      "end": 994.24,
+      "text": " and everything should be going through the same software interface."
+    },
+    {
+      "start": 994.24,
+      "end": 1001.24,
+      "text": " In some cases, to do the root cause analysis, history is helpful,"
+    },
+    {
+      "start": 1001.24,
+      "end": 1006.24,
+      "text": " and that's where you see the other blue box there, previous CPERs."
+    },
+    {
+      "start": 1006.24,
+      "end": 1015.24,
+      "text": " So that's essentially the history from that vendor you would want to feed into the error analysis tool."
+    },
+    {
+      "start": 1015.24,
+      "end": 1018.24,
+      "text": " Then the error analysis tool will take the current CPER,"
+    },
+    {
+      "start": 1018.24,
+      "end": 1024.24,
+      "text": " tell us the history, and then would do an analysis and come up with some recommendations."
+    },
+    {
+      "start": 1024.24,
+      "end": 1027.24,
+      "text": " So what sort of recommendations we are looking for?"
+    },
+    {
+      "start": 1027.24,
+      "end": 1031.24,
+      "text": " Look, it could be simple proof of placement."
+    },
+    {
+      "start": 1031.24,
+      "end": 1034.24,
+      "text": " It could be, hey, you need a firmware update."
+    },
+    {
+      "start": 1034.24,
+      "end": 1036.24,
+      "text": " It could be that, hey, this is a debug done."
+    },
+    {
+      "start": 1036.24,
+      "end": 1039.24,
+      "text": " Debug done analysis is supposed to be done by the vendor,"
+    },
+    {
+      "start": 1039.24,
+      "end": 1044.24,
+      "text": " so contact your vendor so that the information is being sent to the vendor."
+    },
+    {
+      "start": 1044.24,
+      "end": 1048.24,
+      "text": " Now, when the tool has done the analysis,"
+    },
+    {
+      "start": 1048.24,
+      "end": 1051.24,
+      "text": " how the output is supposed to be."
+    },
+    {
+      "start": 1051.24,
+      "end": 1055.24,
+      "text": " So the first piece is the JSON output."
+    },
+    {
+      "start": 1055.24,
+      "end": 1060.24,
+      "text": " JSON output is supposed to be human-readable as well as machine-perceivable,"
+    },
+    {
+      "start": 1060.24,
+      "end": 1066.24,
+      "text": " so that the CSPs are able to take the right action based on the output."
+    },
+    {
+      "start": 1066.24,
+      "end": 1069.24,
+      "text": " So that's what it's showing on the right-hand side."
+    },
+    {
+      "start": 1069.24,
+      "end": 1074.24,
+      "text": " Further analysis, dashboarding, CSPs can do that."
+    },
+    {
+      "start": 1074.24,
+      "end": 1078.24,
+      "text": " The other output that's showing in the bottom"
+    },
+    {
+      "start": 1078.24,
+      "end": 1083.24,
+      "text": " is called CPADS, Common Platform Action Descriptors."
+    },
+    {
+      "start": 1083.24,
+      "end": 1090.24,
+      "text": " So this is another output that has been discussed in Harvard Fault Management Forum."
+    },
+    {
+      "start": 1090.24,
+      "end": 1094.24,
+      "text": " In this morning's talk also that they touched a little bit on this."
+    },
+    {
+      "start": 1094.24,
+      "end": 1099.24,
+      "text": " So the CPADS, it will go through the CSP policies."
+    },
+    {
+      "start": 1099.24,
+      "end": 1106.24,
+      "text": " The idea is it can directly go to the OS or to the BMC to take the action,"
+    },
+    {
+      "start": 1106.24,
+      "end": 1108.24,
+      "text": " or it can also say,"
+    },
+    {
+      "start": 1108.24,
+      "end": 1111.24,
+      "text": " this is an intervention of central vendor and vendor."
+    },
+    {
+      "start": 1111.24,
+      "end": 1117.24,
+      "text": " And for the CPADS route, we are relying on the Harvard Fault Management worksheet."
+    },
+    {
+      "start": 1117.24,
+      "end": 1124.24,
+      "text": " So as I said, our next version of our focus will be combining RAS API,"
+    },
+    {
+      "start": 1124.24,
+      "end": 1125.24,
+      "text": " how it will all look like."
+    },
+    {
+      "start": 1125.24,
+      "end": 1129.24,
+      "text": " So in the next version, we will have it in action."
+    },
+    {
+      "start": 1129.24,
+      "end": 1134.24,
+      "text": " So with that, call to action."
+    },
+    {
+      "start": 1134.24,
+      "end": 1137.24,
+      "text": " So as Rama mentioned, for GPU RAS spec,"
+    },
+    {
+      "start": 1137.24,
+      "end": 1140.24,
+      "text": " we have version 1.7."
+    },
+    {
+      "start": 1140.24,
+      "end": 1143.24,
+      "text": " For the CPU, it's .7."
+    },
+    {
+      "start": 1143.24,
+      "end": 1145.24,
+      "text": " Please take a look at it."
+    },
+    {
+      "start": 1145.24,
+      "end": 1147.24,
+      "text": " Please provide feedback."
+    },
+    {
+      "start": 1147.24,
+      "end": 1150.24,
+      "text": " Any questions and any updates are welcome."
+    },
+    {
+      "start": 1150.24,
+      "end": 1153.24,
+      "text": " And welcome to join our group."
+    },
+    {
+      "start": 1153.24,
+      "end": 1156.24,
+      "text": " We have the main list and the organization."
+    },
+    {
+      "start": 1156.24,
+      "end": 1160.24,
+      "text": " So with that, we are ready for questions."
+    },
+    {
+      "start": 1160.24,
+      "end": 1162.24,
+      "text": " Well, let's thank our speakers first."
+    },
+    {
+      "start": 1162.24,
+      "end": 1168.24,
+      "text": " I hope we have time for one question."
+    },
+    {
+      "start": 1168.24,
+      "end": 1174.24,
+      "text": " So if you have a question, put it in the mic and ask it."
+    },
+    {
+      "start": 1174.24,
+      "end": 1176.24,
+      "text": " We are self-explanatory."
+    },
+    {
+      "start": 1176.24,
+      "end": 1177.24,
+      "text": " No question."
+    },
+    {
+      "start": 1188.24,
+      "end": 1189.24,
+      "text": " Hey, thanks for that."
+    },
+    {
+      "start": 1189.24,
+      "end": 1191.24,
+      "text": " If microsystems would be used, right,"
+    },
+    {
+      "start": 1191.24,
+      "end": 1194.24,
+      "text": " and especially the last year or so,"
+    },
+    {
+      "start": 1194.24,
+      "end": 1197.24,
+      "text": " we have seen the GPUs have grown out of the box"
+    },
+    {
+      "start": 1197.24,
+      "end": 1200.24,
+      "text": " into more of a scale of networking, right,"
+    },
+    {
+      "start": 1200.24,
+      "end": 1203.24,
+      "text": " where it's a back level of multiple ranks"
+    },
+    {
+      "start": 1203.24,
+      "end": 1206.24,
+      "text": " where the GPUs are going to go over and over and network, right,"
+    },
+    {
+      "start": 1206.24,
+      "end": 1210.24,
+      "text": " or the protocol."
+    },
+    {
+      "start": 1210.24,
+      "end": 1215.24,
+      "text": " I think the single biggest issue that we see is back level failures here,"
+    },
+    {
+      "start": 1215.24,
+      "end": 1218.24,
+      "text": " right, on the scale of networking, right?"
+    },
+    {
+      "start": 1218.24,
+      "end": 1219.24,
+      "text": " I would like to see,"
+    },
+    {
+      "start": 1219.24,
+      "end": 1224.24,
+      "text": " I would like to see how moving away from the node, right,"
+    },
+    {
+      "start": 1224.24,
+      "end": 1227.24,
+      "text": " into more of a back level brass, right,"
+    },
+    {
+      "start": 1227.24,
+      "end": 1232.24,
+      "text": " how does the resources be put on the broken node?"
+    },
+    {
+      "start": 1232.24,
+      "end": 1236.24,
+      "text": " Yeah, like, there are a few discussions happened."
+    },
+    {
+      "start": 1236.24,
+      "end": 1238.24,
+      "text": " That's where, like, we're talking about, like,"
+    },
+    {
+      "start": 1238.24,
+      "end": 1243.24,
+      "text": " a cluster level, how do we, like, blast areas."
+    },
+    {
+      "start": 1243.24,
+      "end": 1247.24,
+      "text": " And that is the next version of the thing."
+    },
+    {
+      "start": 1247.24,
+      "end": 1249.24,
+      "text": " And the current version, like, talks about"
+    },
+    {
+      "start": 1249.24,
+      "end": 1251.24,
+      "text": " that, for example,"
+    },
+    {
+      "start": 1251.24,
+      "end": 1254.24,
+      "text": " when you go scaling at the back level,"
+    },
+    {
+      "start": 1254.24,
+      "end": 1258.24,
+      "text": " you can use different proprietary protocols or things."
+    },
+    {
+      "start": 1258.24,
+      "end": 1260.24,
+      "text": " Those things are covered,"
+    },
+    {
+      "start": 1260.24,
+      "end": 1263.24,
+      "text": " but next version, like, you called out, like,"
+    },
+    {
+      "start": 1263.24,
+      "end": 1268.24,
+      "text": " that is a very first thing we want to tackle."
+    },
+    {
+      "start": 1268.24,
+      "end": 1270.24,
+      "text": " That's a single biggest thing."
+    },
+    {
+      "start": 1270.24,
+      "end": 1271.24,
+      "text": " Yes, yes, yes."
+    },
+    {
+      "start": 1271.24,
+      "end": 1273.24,
+      "text": " So I think I'll be able to see what kind of..."
+    },
+    {
+      "start": 1273.24,
+      "end": 1275.24,
+      "text": " Prioritize on that, yeah, yeah."
+    },
+    {
+      "start": 1275.24,
+      "end": 1276.24,
+      "text": " Thank you, yeah."
+    },
+    {
+      "start": 1276.24,
+      "end": 1278.24,
+      "text": " We'll prioritize that and maybe 1.9,"
+    },
+    {
+      "start": 1278.24,
+      "end": 1280.24,
+      "text": " don't wait for 2.0."
+    },
+    {
+      "start": 1280.24,
+      "end": 1281.24,
+      "text": " Thank you."
+    },
+    {
+      "start": 1281.24,
+      "end": 1283.24,
+      "text": " I think we don't have time."
+    },
+    {
+      "start": 1283.24,
+      "end": 1286.24,
+      "text": " So questions, if you can get it offline."
+    },
+    {
+      "start": 1286.24,
+      "end": 1288.24,
+      "text": " Once again, thanks."
+    }
+  ],
+  "language": "en",
+  "language_probability": 0.7646484375,
+  "transcript_path": "/app/artifacts/test-gpu/ai-hyperscale-standardized-metrics/transcripts/AI hyperscale standardized metrics.txt",
+  "duration": 78.93447351455688,
+  "device": "cuda",
+  "compute_type": "float16"
+}

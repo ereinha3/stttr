@@ -2,20 +2,32 @@ version: "3.9"
 
 services:
   worker:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      - WHISPR_ORCHESTRATOR_URL=http://localhost:8000
-      - VLLM_BASE_URL=http://vllm:8001
+      - WHISPR_ARTIFACTS_ROOT=/app/artifacts
+      - WHISPR_MODEL_CACHE_ROOT=/app/models
+      - VLLM_BASE_URL=${VLLM_BASE_URL:-http://host.docker.internal:8000}
+      - VLLM_MODEL=${VLLM_MODEL:-gpt-oss-20b}
+      - OPEN_SERP_BASE_URL=${OPEN_SERP_BASE_URL:-http://host.docker.internal:7000}
     volumes:
       - ./artifacts:/app/artifacts
-    depends_on:
-      - vllm
-
-  vllm:
-    image: vllm/vllm-openai:latest
-    command: ["--model", "gpt-oss-20b"]
-    environment:
-      - CUDA_VISIBLE_DEVICES=0
+      - ./models:/app/models
+      - ../test-samples:/app/test-samples:ro
+      - whisper-cache:/root/.cache
     ports:
-      - "8001:8001"
+      - "9000:9000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # For local testing without orchestrator
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
+volumes:
+  whisper-cache:

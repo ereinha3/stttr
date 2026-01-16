@@ -7,18 +7,27 @@ import json
 import os
 import uuid
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import httpx
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 
 from worker.image_search import suggest_images_for_sections
-from worker.llm import VLLMClient
-from worker.settings import ARTIFACTS_ROOT, OPENSERP_BASE_URL, VLLM_BASE_URL, VLLM_MODEL
-from worker.summary import summarise_with_vllm
+from worker.image_placement import apply_placements_to_sections, determine_image_placements
+from worker.llm import LLMClient
+from worker.settings import (
+    ARTIFACTS_ROOT,
+    LLM_API_KEY,
+    LLM_BASE_URL,
+    LLM_MODEL,
+    OPENSERP_BASE_URL,
+    SKIP_LLM,
+)
+from worker.summary import parse_summary_response, summarise_with_vllm
 from worker.transcribe import transcribe_file
 from worker.utils import ensure_directory, slugify
+from worker.vision import ImageAnalysis, analyze_images
 
 app = FastAPI(title="Whispr Worker", version="0.1.0")
 
@@ -77,10 +86,23 @@ def _build_markdown(title: str, summary_data: Dict[str, Any], sections: list[Dic
 
     for section in sections:
         lines.append(f"## {section.get('title', 'Section')}")
+        
+        # Handle user-provided images (from vision processing)
+        section_images = section.get("images") or []
+        for img in section_images:
+            img_path = img.get("path") or img.get("filename", "image")
+            img_desc = img.get("description", "Image")
+            lines.append(f"![{img_desc}]({img_path})")
+            if img.get("placement_reason"):
+                lines.append(f"*{img.get('placement_reason')}*")
+            lines.append("")
+        
+        # Handle web-searched images (fallback)
         image = section.get("image")
         if image and image.get("url"):
             lines.append(f"![{image.get('title', 'Image')}]({image['url']})")
             lines.append("")
+        
         summary = (section.get("summary") or "").strip()
         if summary:
             lines.append(summary)
@@ -117,6 +139,7 @@ async def process_audio(
     title: Optional[str],
     understanding_level: int,
     context: Optional[Dict[str, Any]],
+    image_paths: Optional[List[Path]] = None,
 ) -> Dict[str, Any]:
     job_dir = ensure_directory(ARTIFACTS_ROOT / uuid.uuid4().hex)
 
@@ -127,30 +150,67 @@ async def process_audio(
 
     transcript_text = " ".join(segment["text"] for segment in transcription["segments"])
 
-    llm_client = VLLMClient(base_url=VLLM_BASE_URL, api_key=os.getenv("VLLM_API_KEY"))
+    # Initialize LLM client
+    llm_client = LLMClient(base_url=LLM_BASE_URL, api_key=LLM_API_KEY)
 
-    summary_json = await summarise_with_vllm(
-        transcript_text,
-        understanding_level=understanding_level,
-        context=context,
-        model=VLLM_MODEL,
-        llm_client=llm_client,
-    )
-    summary_data = json.loads(summary_json)
+    # Skip LLM if configured (for testing transcription only)
+    if SKIP_LLM:
+        summary_data = {
+            "title": title or "Untitled Session",
+            "overview": transcript_text[:500] + "..." if len(transcript_text) > 500 else transcript_text,
+            "sections": [{"title": "Full Transcript", "summary": transcript_text, "key_points": []}],
+            "glossary": [],
+            "follow_up_questions": [],
+        }
+        enriched_sections = summary_data["sections"]
+    else:
+        summary_json = await summarise_with_vllm(
+            transcript_text,
+            understanding_level=understanding_level,
+            context=context,
+            model=LLM_MODEL,
+            llm_client=llm_client,
+        )
+        summary_data = parse_summary_response(summary_json)
+
+        sections = summary_data.get("sections", [])
+        
+        # Process user-provided images if any
+        if image_paths:
+            image_analyses = await analyze_images(
+                image_paths,
+                llm_client=llm_client,
+                context=f"Images from a presentation about: {title or 'technical content'}",
+            )
+            
+            # Determine where to place each image
+            if image_analyses and sections:
+                placements = await determine_image_placements(
+                    image_analyses,
+                    sections,
+                    llm_client=llm_client,
+                    min_relevance=0.3,
+                )
+                
+                # Apply placements to sections
+                enriched_sections = apply_placements_to_sections(sections, placements)
+            else:
+                enriched_sections = sections
+        else:
+            # Fall back to image search if no images provided
+            enriched_sections = await suggest_images_for_sections(
+                sections,
+                download=False,
+                image_dir=str(job_dir / "images"),
+                llm_client=llm_client,
+                model=LLM_MODEL,
+                base_url=OPENSERP_BASE_URL,
+            )
+        
+        summary_data["sections"] = enriched_sections
 
     final_title = summary_data.get("title") or title or "Untitled Session"
     slug = slugify(final_title)
-
-    sections = summary_data.get("sections", [])
-    enriched_sections = await suggest_images_for_sections(
-        sections,
-        download=False,
-        image_dir=str(job_dir / "images"),
-        llm_client=llm_client,
-        model=VLLM_MODEL,
-        base_url=OPENSERP_BASE_URL,
-    )
-    summary_data["sections"] = enriched_sections
 
     transcript_path = transcription.get("transcript_path")
     markdown = _build_markdown(final_title, summary_data, enriched_sections, transcript_path)
@@ -170,17 +230,34 @@ async def process_audio(
     }
 
 
+async def _write_temp_images(images: List[UploadFile]) -> List[Path]:
+    """Write uploaded images to temp files and return paths."""
+    image_paths = []
+    for img in images:
+        if not img.filename:
+            continue
+        suffix = Path(img.filename).suffix or ".jpg"
+        temp_dir = ensure_directory(Path("/tmp") / f"whispr-img-{uuid.uuid4().hex}")
+        temp_path = temp_dir / f"{img.filename}"
+        data = await img.read()
+        temp_path.write_bytes(data)
+        image_paths.append(temp_path)
+    return image_paths
+
+
 @app.post("/process")
 async def process_endpoint(
     audio: UploadFile = File(...),
+    images: List[UploadFile] = File(default=[]),
     metadata: Optional[str] = Form(None),
     title: Optional[str] = Form(None),
     understanding_level: int = Form(3),
     context: Optional[str] = Form(None),
     audio_url: Optional[str] = Form(None),
 ):
-    if understanding_level < 1 or understanding_level > 5:
-        raise HTTPException(status_code=400, detail="understanding_level must be between 1 and 5")
+    # Allow understanding_level 0-5 (0 = complete novice)
+    if understanding_level < 0 or understanding_level > 5:
+        raise HTTPException(status_code=400, detail="understanding_level must be between 0 and 5")
 
     meta = _load_metadata(metadata, title, understanding_level, context)
     meta_title = meta.get("title")
@@ -189,6 +266,11 @@ async def process_endpoint(
 
     if audio_url and audio.filename:
         raise HTTPException(status_code=400, detail="Provide either audio file or audio_url, not both")
+
+    # Process uploaded images
+    image_paths: List[Path] = []
+    if images:
+        image_paths = await _write_temp_images([img for img in images if img.filename])
 
     try:
         if audio.filename:
@@ -203,18 +285,31 @@ async def process_endpoint(
             title=meta_title,
             understanding_level=meta_understanding,
             context=meta_context,
+            image_paths=image_paths if image_paths else None,
         )
         return JSONResponse(result)
     finally:
+        # Cleanup temp files
         try:
             if "audio_path" in locals():
-                tmp_root = audio_path.parent
                 if audio_path.exists():
                     audio_path.unlink()
-                if tmp_root.exists():
-                    asyncio.create_task(asyncio.to_thread(lambda: None))
+                if audio_path.parent.exists():
+                    import shutil
+                    shutil.rmtree(audio_path.parent, ignore_errors=True)
         except Exception:
             pass
+        
+        # Cleanup temp image files
+        for img_path in image_paths:
+            try:
+                if img_path.exists():
+                    img_path.unlink()
+                if img_path.parent.exists():
+                    import shutil
+                    shutil.rmtree(img_path.parent, ignore_errors=True)
+            except Exception:
+                pass
 
 
 @app.get("/health")

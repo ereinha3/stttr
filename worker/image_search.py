@@ -38,10 +38,16 @@ async def search_images(
 
     params = {"text": query, "limit": num_results}
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        response = await client.get(endpoint, params=params)
-    response.raise_for_status()
-    payload = response.json()
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(endpoint, params=params)
+        response.raise_for_status()
+        payload = response.json()
+    except (httpx.ConnectError, httpx.HTTPStatusError, httpx.TimeoutException) as e:
+        # Image search is optional - return empty list if service unavailable
+        import logging
+        logging.getLogger(__name__).warning("Image search unavailable: %s", e)
+        return []
 
     results: List[ImageCandidate] = []
     for item in payload[:num_results]:
